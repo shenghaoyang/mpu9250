@@ -1504,6 +1504,7 @@ impl<E, DEV, MODE> Mpu9250<DEV, MODE> where DEV: Device<Error = E>
         let orig_sample_rate_divisor = self.sample_rate_divisor;
         // reset device
         self.dev.write(Register::PWR_MGMT_1, 0x80)?;
+        delay.delay_ms(100);
         // get stable time source;
         // Auto select clock source to be PLL gyroscope reference if ready
         // else use the internal oscillator, bits 2:0 = 001
